@@ -29,11 +29,27 @@ export const Navbar = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+    }, [isMenuOpen]);
+
     return (
         <nav
             className={cn(
-                "fixed w-full z-40 transition-all duration-300", isScrolled ? "py-1 bg-background/80 backdrop-blur-md shadow-xs" : "bg-transparent"
+                "fixed top-0 left-0 w-full z-40 transition-all duration-300"
             )}>
+            {/* Background Layer */}
+            <div
+                className={cn(
+                    "absolute inset-0 -z-10 transition-all duration-300",
+                    isScrolled ? "bg-background/80 backdrop-blur-md shadow-xs" : "bg-transparent"
+                )}
+            />
+
             <div className="container flex h-16 items-center justify-between">
 
                 <a className="text-md md:text-xl font-bold text-primary flex items-center" href="#hero">
